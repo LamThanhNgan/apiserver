@@ -13,7 +13,7 @@ const path = require('path');
 const ccpPath = path.resolve(__dirname, '..' ,'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
 const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
 console.log(ccpPath)
-app.get('/api/queryallcars', async function (req, res) {
+app.get('/apiV2/queryallcars', async function (req, res) {
     try {
 
         // Create a new file system based wallet for managing identities.
@@ -54,7 +54,7 @@ app.get('/api/queryallcars', async function (req, res) {
 });
 
 
-app.get('/api/query/:car_index', async function (req, res) {
+app.get('/apiV2/query/:car_index', async function (req, res) {
     try {
 
         // Create a new file system based wallet for managing identities.
@@ -94,7 +94,7 @@ app.get('/api/query/:car_index', async function (req, res) {
     }
 });
 
-app.post('/api/submit/', async function (req, res) {
+app.post('/apiV2/submit/', async function (req, res) {
     try {
 
         // Create a new file system based wallet for managing identities.
@@ -126,9 +126,9 @@ app.post('/api/submit/', async function (req, res) {
         
         
         console.log(req.body)
-        // await contract.submitTransaction('createCar', req.body);
-        // console.log('Transaction has been submitted');
-        // res.send('Transaction has been submitted');
+        await contract.submitTransaction('createCar', 'STI04',req.body);
+        console.log('Transaction has been submitted');
+        res.send('Transaction has been submitted');
 
         // Disconnect from the gateway.
         await gateway.disconnect();
@@ -139,7 +139,7 @@ app.post('/api/submit/', async function (req, res) {
     }
 })
 
-app.put('/api/changeowner/:car_index', async function (req, res) {
+app.put('/apiV2/changeowner/:car_index', async function (req, res) {
     try {
 
         // Create a new file system based wallet for managing identities.
